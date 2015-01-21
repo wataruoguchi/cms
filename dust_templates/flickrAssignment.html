@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Flickr Assignment</title>
+	<style>
+		#photos>img {
+			width: 200px;
+			display: inline;
+		}
+	</style>
+</head>
+<body>
+	<h1>CMS</h1>
+	<h2>Flickr</h2>
+	<h3>Goal</h3>
+	<p>As a user, I want to see photos tagged with Vancouver.</p>
+	<p>As a dev, I want to search Flickr's API for photos with the tag "Vancouver"</p>
+	
+	<h3>Using template</h3>
+	<div>
+		{#photos}
+			<img src="{uri}" alt="">
+		{/photos}
+	</div>
+</body>
+</html>
