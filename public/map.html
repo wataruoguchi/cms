@@ -11,12 +11,23 @@
 </head>
 <body>
 	<h3>Live demo</h3>
-	<div id="mapBox" style="height: 800px;"></div>
+	<div id="mapBox" style="height: 600px;"></div>
 	<script>
-		var map = new mxn.Mapstraction('mapBox', 'leaflet'); 
-		var latlon = new mxn.LatLonPoint(51.50733, -0.12769);
-
-		map.setCenterAndZoom(latlon, 10);
+		var map = new mxn.Mapstraction('mapBox', 'leaflet'),
+		locations = {
+			london: {
+				lat: 51.50733,
+				lon: -0.12769,
+				zoom: 100
+			},
+			vanarts: {
+				lat: 49.282698,
+				lon: -123.115358,
+				zoom: 50
+			}
+		};
+		var van = locations.vanarts;
+		map.setCenterAndZoom(new mxn.LatLonPoint(van.lat, van.lon), van.zoom);
 	</script>
 </body>
 </html>
