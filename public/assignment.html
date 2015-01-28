@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>5homework.html</title>
+</head>
+
+<body>
+
+	<h1>Homework</h1>
+    <h2>Assignment</h2>
+    
+    <h3>Goal</h3>
+    <p>As a user, I want to see my public photos</p>
+    <p>As a dev, query the Flickr API to only display photos from my user ID. Hint your user ID is located in the API explorer. Meaning when you find the correct Flickr API method, go to the API explorer at the bottom, and your user ID will be on the right panel.</p>
+    
+    <h3>Expectation</h3>
+    <p>Both the server (node.js) and the client (browser) should show the same photos. Upload at least two photos to your Flickr photostream.</p>
+    
+    <h3>Technologies</h3>
+    <ul>
+    	<li>Flickr API</li>
+        <li>JavaScript</li>
+        <li>jQuery</li>
+        <li>jQuery AJAX</li>
+        <li>node.js</li>
+        <li>hapi.js</li>
+    </ul>
+
+    <h3>Live demo</h3>
+    <h3>Using Ajax</h3>
+    <!-- Flickr API global variables -->
+    <script src="shared/credentials.js"></script>
+    <script src="shared/flickr.js"></script>
+    <!-- jQuery library -->
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <!-- Page specic code -->
+    <script>
+        $.ajax({
+            "url": 'https://api.flickr.com/services/rest/',
+            "data": {
+                "method": 'flickr.photos.search',
+                "api_key": credentials.flickr.api_key,
+                "user_id" : credentials.flickr.user_id,
+                //"tags": 'seabus',
+                "format": 'json',
+                "nojsoncallback": 1
+            },
+            "success": function (response) {
+                var photoSrc = createJpgPath(response.photos.photo),
+                    html = "";
+                $.each(photoSrc, function (i, src) {
+                    html += '<img src="' + src + '">';
+                });
+                
+                $('body').append(html);
+            }
+        });
+    </script>
+</body>
+</html>

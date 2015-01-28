@@ -70,6 +70,7 @@ server.start(function(){
 	console.log("Server running at "+server.info.uri);
 });
 
+
 // Different approach on Jan. 21th ---- start
 server.route ({
 	method: 'GET',
@@ -100,38 +101,32 @@ server.route({
     handler: function (request, reply) {
     	//get credentials
     	var credentials = require('./shared/credentials.js'),
+    	flickrLib = require('./shared/flickr.js'),
+		httpRequest = require('request');
 		flickrQueryString = {
     	    		"method": 'flickr.photos.search',
     	    		"api_key": credentials.flickr.api_key,
-    	    		"tags": 'vancouver',	//(3)photos tagged with Vancouver
+    	    		"user_id" : credentials.flickr.user_id,
+    	    		//"tags": 'seabus',	//(3)photos tagged with Vancouver
     	    		"format": 'json',
     	    		"nojsoncallback": 1
     	    	},
-		httpRequest = require('request');
-
+    	flickr = {
+    		"url": 'https://api.flickr.com/services/rest/',
+    		"qs": flickrQueryString,
+    		"json": true
+    	};
     	//request to flickr
-		httpRequest({
-			method: 'GET',
-			url: 'https://api.flickr.com/services/rest/',
-			qs: flickrQueryString,
-			json: "true"
-		}, 
-
+		httpRequest(flickr, 
     	//get response by frickr
 		function (error, incomingMessage, response) {
 			if (!error && incomingMessage.statusCode == 200) {
-				var photos = response.photos.photo,
-				uriArray = [],
-				uri;
-
-				photos.forEach(function(photo, idx){
-					//(2)includes the fully resolved JPG hyperlinks of photos
-					uri = "https://farm"+photo.farm+".staticflickr.com/"+photo.server+"/"+photo.id+"_"+photo.secret+".jpg";
-					uriArray.push({"uri": uri});					
-				});
-				reply({"photos" : uriArray});
+				var photoSrc = flickrLib.createJpgPath(response.photos.photo);
+				//todo inclass : output HTML images
+				//reply({"photos" : photoSrc});
+				reply.view('./flickrAssignment2.html',{"photos" : photoSrc});
 			}
-		})
+		});
     }
 });
 // Different approach on Jan. 21th ---- end

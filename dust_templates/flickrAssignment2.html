@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Flickr Assignment</title>
+	<style>
+		img {
+			width: 200px;
+			display: inline;
+		}
+	</style>
+</head>
+<body>
+	<h1>Homework</h1>
+    <h2>Assignment</h2>
+    
+    <h3>Goal</h3>
+    <p>As a user, I want to see my public photos</p>
+    <p>As a dev, query the Flickr API to only display photos from my user ID. Hint your user ID is located in the API explorer. Meaning when you find the correct Flickr API method, go to the API explorer at the bottom, and your user ID will be on the right panel.</p>
+    
+    <h3>Expectation</h3>
+    <p>Both the server (node.js) and the client (browser) should show the same photos. Upload at least two photos to your Flickr photostream.</p>
+
+	<h3>Live demo</h3>
+	<h3>Using template by hapi-dust</h3>
+	<div>
+		{#photos}
+			<img src="{#.}{.}{/.}">
+		{/photos}
+	</div>
+</body>
+</html>
