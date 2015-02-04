@@ -1,12 +1,80 @@
-<!DOCTYPE html>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>map.html</title>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+</head>
+
+<body>
+	<h1>Slippy Map</h1>
+	<h2>Basic Map</h2>
+    
+    <h3>Goal</h3>
+    <p>Display a slippy map with a starting location.</p>
+    
+    <h3>Technologies</h3>
+    <ul>
+        <li>Leaflet JS API</li>
+        <li>Mapstraction JS abstraction layer API</li>
+        <li>JavaScript</li>
+        <li>CSS</li>
+        <li>HTML</li>
+    </ul>
+    
+	<h3>Live demo</h3>
+    <div id="mapBox" style="height: 400px;"></div>
+    <!-- Leaflet map provider API -->
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <!-- Attach Google Maps API v3 (sensor var allows location detection) -->
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <!-- Mapstraction abstraction layer -->
+    <script src="map/mxn.js?(googlev3)"></script>
+    <!-- jQuery library -->
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <!-- Page specific code -->
+    <script>
+	// todo inclass centre and zoom on VanArts
+		var map = new mxn.Mapstraction('mapBox', 'googlev3'),
+			locations = {
+				london: {
+					lat: 51.50733,
+					lon: -0.12769,
+					zoom: 10,
+					label: "Oi London!"
+				},
+				gastown: {
+					lat: 49.284491,
+					lon: -123.108996,
+					zoom: 17,
+					label: "Hello <b>World</b>"
+				}
+			},
+			createPin;
+		map.addLargeControls(); //zoom and pan controls
+		createPin = function (name, target) {
+			var point = new mxn.LatLonPoint(target.lat, target.lon),
+				pin = new mxn.Marker(point);
+			if (name === "london") {
+				map.setCenterAndZoom(point, 2);
+			}
+			pin.setInfoBubble(target.label);
+			map.addMarker(pin);
+			pin.openBubble();
+		};
+		$.each(locations, createPin);
+	</script>
+</body>
+</html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
-	<!-- leaflet map provider -->
+	leaflet map provider
 	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-	<!-- Mapstraction abstraction layer -->
+	Mapstraction abstraction layer
 	<script src="map/mxn.js?(leaflet)"></script>
 </head>
 <body>
@@ -24,10 +92,24 @@
 				lat: 49.282698,
 				lon: -123.115358,
 				zoom: 50
+			},
+			gastown: {
+				lat: 49.2832584,
+				lon: -123.1057357,
+				zoom: 16
 			}
 		};
-		var van = locations.vanarts;
-		map.setCenterAndZoom(new mxn.LatLonPoint(van.lat, van.lon), van.zoom);
+		var target = locations.gastown;
+		var targetLatLonPoint = new mxn.LatLonPoint(target.lat, target.lon);
+		//map
+		map.setCenterAndZoom(targetLatLonPoint, target.zoom);
+
+		//marker
+		var targetMarker = new mxn.Marker(targetLatLonPoint);
+		targetMarker.setInfoBubble("Gastown, Vancouver");
+		map.addMarker(targetMarker);
+		targetMarker.openBubble();
+
 	</script>
 </body>
-</html>
+</html> -->
