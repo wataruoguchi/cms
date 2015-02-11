@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>facebook get likers</title>
+</head>
+<body>
+	<h1>get likers on facebook</h1>
+	<p>Display 4 (or fewer) profile photos of a Facebook Page based on the photo likes. There are Page fans that like photos, display those user's profile photos. Any Facebook Page is allowed if it has those required users.</p>
+	<div id="likers"></div>
+    <!-- jQuery library -->
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <!-- Page specific code -->
+	<script>
+        var endpoint = "http://graph.facebook.com/", id = "vancouver.institute.of.media.arts";
+        $.ajax({
+        	url: endpoint+id+'/photos'
+        })
+        .done(function(response) {
+        	var likers = response.data[0].likes.data;
+        	var divbox = $("#likers");
+        	$.each(likers, function(index, liker){
+        		(index<4)?divbox.append('<img src="'+endpoint+liker.id+'/picture'+'" alt="'+liker.name+'">'):null;
+        	});
+        	divbox.append(' like '+'<img src="'+endpoint+id+'/picture'+'" alt="">');
+        });
+	</script>
+</body>
+</html>

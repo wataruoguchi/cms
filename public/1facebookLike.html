@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>1facebookLike.html</title>
+</head>
+
+<body>
+	<h1>Facebook</h1>
+    <h2>Social Plugin</h2>
+    
+    <h3>Goal</h3>
+    <p>As a user, I want the ability to follow a blog post in Facebook.</p>
+    
+    <h3>Technologies</h3>
+    <ul>
+    	<li>Facebook social plugin</li>
+    </ul>
+    
+    <h3>Resources</h3>
+    <ul>
+    	<li><a href="https://developers.facebook.com/docs/plugins/like-button">Like button documentation</a></li>
+    </ul>
+    
+    <h3>Live demo</h3>
+    <h4>iframe</h4>
+    <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwataruoguchi.com%2Fterm3project%2F&amp;width=200&amp;layout=box_count&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=65&amp;appId=362573297236687" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:65px;" allowTransparency="true"></iframe>
+
+    <h4>html5</h4>
+    <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=362573297236687&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href="http://wataruoguchi.com/term3project/" data-width="200" data-layout="box_count" data-action="like" data-show-faces="true" data-share="true"></div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>4facebookApiPage.html</title>
+</head>
+
+<body>
+	<h1>Facebook</h1>
+    <h2>Graph API - Page</h2>
+    
+    <h3>Goal</h3>
+    <p>As a user, I want to view my school's cover image on a web page.</p>
+    
+    <h3>Technologies</h3>
+    <ul>
+    	<li>Facebook JavaScript Graph API</li>
+        <li>jQuery AJAX</li>
+        <li>jQuery</li>
+        <li>JavaScript</li>
+    </ul>
+    
+    <h3>Live demo</h3>
+    <img id="cover">
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script>
+    $.ajax({
+        url: 'http://graph.facebook.com/vancouver.institute.of.media.arts'
+    })
+    .done(function(response) {
+        var img_src = response.cover.source;
+        $("#cover").attr({
+            src: img_src
+        });
+    });
+    
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
