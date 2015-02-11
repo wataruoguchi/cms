@@ -130,3 +130,34 @@ server.route({
     }
 });
 // Different approach on Jan. 21th ---- end
+
+//Twitter
+server.route({
+    method: 'GET',
+    path:'/twitter',
+    handler: function (request, reply) {
+    	var credentials = require("./credentials.js"),
+		Twit = require('twit'),
+		twitterClient = new Twit(credentials.twitter);
+
+		twitterClient.get('statuses/user_timeline', { screen_name: 'vanarts', count: 2 },  function (err, data, response) {
+			reply(data);
+		});
+
+/*    	//get credentials
+    	var credentials = require('./credentials.js'),
+    	flickrLib = require('./twitterClient.js'),
+		httpRequest = require('request');
+
+		httpRequest(flickr, 
+    	//get response by frickr
+		function (error, incomingMessage, response) {
+			if (!error && incomingMessage.statusCode == 200) {
+				var photoSrc = flickrLib.createJpgPath(response.photos.photo);
+				//todo inclass : output HTML images
+				//reply({"photos" : photoSrc});
+				reply.view('./flickrAssignment2.html',{"photos" : photoSrc});
+			}
+		});*/
+    }
+});
